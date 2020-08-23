@@ -1,26 +1,89 @@
-minikube start --vm-driver=virtualbox   (starting the minikube)
+(starting the minikube) 
 
-minikube docker-env  (get all the required parameters to export so that you can use the docker that comes with the minikube rather than your local docker)
+minikube start --vm-driver=virtualbox    
 
-docker image ls (get the docker images, the following images are required to get the docker images)
+  
 
-docker image pull richardchesterwood/k8s-fleetman-webapp-angular:release0-5  ( pulls the docker image from hub.docker.com)
+(get all the required parameters to export so that you can use the docker that comes with the minikube rather than your local docker) 
 
-docker container run -p 80:80  -d richardchesterwood/k8s-fleetman-webapp-angular:release0-5  (if image not present in pulls automaticaly, left part is the exposed port )
+minikube docker-env    
 
-docker container rm d72657442f5d   (stopping a docker container)
+ 
 
-docker container rm d72657442f5d  (removing a docker container)
+(get the docker images, the following images are required to get the docker images) 
 
-if the docker containers keeps on increasing, it is difficult to manage so usage of kubernetes. usally we have one container in a pod , but we can have many like helper containers which we call sidecars.
+docker image ls 
 
-A pod is a wrapper over docker container. basic unit of deployment.
+ 
 
-better to increase tag names to increased releases of docker containers.
+ ( pulls the docker image from hub.docker.com) 
 
-kubectl get all  (get all the pods and services running)
+docker image pull richardchesterwood/k8s-fleetman-webapp-angular:release0-5 
 
-kubectl exec webapp ls (executes the pod where name is webapp and runs ls)
+    
 
-kubectl -it exec webapp sh  (opens the shell in a interactive mode)
+(if image not present in pulls automaticaly, left part is the exposed port ) 
 
+docker container run -p 80:80  -d richardchesterwood/k8s-fleetman-webapp-angular:release0-5    
+
+  
+
+removing a docker container) 
+
+docker container rm d72657442f5d    
+
+ 
+
+if the docker containers keeps on increasing, it is difficult to manage so usage of kubernetes. usally we have one container in a pod , but we can have many like helper containers which we call sidecars. 
+
+  
+
+A pod is a wrapper over docker container. basic unit of deployment. 
+
+  
+
+better to increase tag names to increased releases of docker containers. 
+
+  
+
+get all the pods and services running) 
+
+kubectl get all    
+
+ 
+
+(executes the pod where name is webapp and runs ls) 
+
+kubectl exec webapp ls   
+
+ 
+
+(opens the shell in a interactive mode) 
+
+kubectl -it exec webapp sh   
+
+ 
+
+Kubernetes service 
+
+ 
+
+Pod is a logical unit. Inorder to expose our web application. We need to ensure we expose it to the outer world. We created a Service. 
+
+ 
+
+Bydefault the target port defaults the port . 
+
+ 
+
+Services are long lived entities. Whereas pods are ephemeral. 
+
+ 
+
+Gets the ip of minikube 
+
+minikube ip 
+
+ 
+
+Usage of service – create different services and switch between them because of labels. Faster way so that you don’t wait for the pod to be killed and the new image being downloaded. 
