@@ -1,0 +1,26 @@
+minikube start --vm-driver=virtualbox   (starting the minikube)
+
+minikube docker-env  (get all the required parameters to export so that you can use the docker that comes with the minikube rather than your local docker)
+
+docker image ls (get the docker images, the following images are required to get the docker images)
+
+docker image pull richardchesterwood/k8s-fleetman-webapp-angular:release0-5  ( pulls the docker image from hub.docker.com)
+
+docker container run -p 80:80  -d richardchesterwood/k8s-fleetman-webapp-angular:release0-5  (if image not present in pulls automaticaly, left part is the exposed port )
+
+docker container rm d72657442f5d   (stopping a docker container)
+
+docker container rm d72657442f5d  (removing a docker container)
+
+if the docker containers keeps on increasing, it is difficult to manage so usage of kubernetes. usally we have one container in a pod , but we can have many like helper containers which we call sidecars.
+
+A pod is a wrapper over docker container. basic unit of deployment.
+
+better to increase tag names to increased releases of docker containers.
+
+kubectl get all  (get all the pods and services running)
+
+kubectl exec webapp ls (executes the pod where name is webapp and runs ls)
+
+kubectl -it exec webapp sh  (opens the shell in a interactive mode)
+
