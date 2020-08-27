@@ -8,7 +8,6 @@ spec:
   # or may be external users to connect to (Eg browser)
   selector:
     app: webapp
-    release: "0-5"
 
   ports:
     - name: http
@@ -34,5 +33,49 @@ spec:
     - name: http
       port: 8161
       nodePort: 30010
+
+    - name: endpoint
+      port: 61616
+
   type: NodePort
-  #type: ClusterIP
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-position-tracker
+spec:
+  # This defines which pods are going to be represented by the service.
+  # the service becomes a network endpoint for either other services
+  # or may be external users to connect to (Eg browser)
+  selector:
+    app: position-tracker
+
+  ports:
+    - name: http
+      port: 8080
+      nodePort: 30020
+
+  type: NodePort
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-api-gateway
+spec:
+  # This defines which pods are going to be represented by the service.
+  # the service becomes a network endpoint for either other services
+  # or may be external users to connect to (Eg browser)
+  selector:
+    app: api-gateway
+
+  ports:
+    - name: http
+      port: 8080
+      nodePort: 30021
+
+  type: NodePort
