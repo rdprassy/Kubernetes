@@ -23,10 +23,9 @@ spec:
       volumes:
         - name: mongo-persistent-storage
           #pointer to the configuration of How we want the mount to be implemented.
-          hostPath:
-            path: /mnt/some/directory/structure/
-            type: DirectoryOrCreate
-            #aws things.
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+
 
 ---
 
